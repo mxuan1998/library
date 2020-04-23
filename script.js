@@ -3,10 +3,8 @@ const addBook = document.querySelector(".add-new");
 const formContainer = document.querySelector(".form-container");
 const fields = document.querySelectorAll(".field");
 const submit = document.querySelector(".submit");
-const cancel = document.querySelector("cancel");
-const ul = document.querySelector("ul")
-
-let myLibrary = [];
+const cancel = document.querySelector(".cancel");
+const ul = document.querySelector("ul");
 
 function Book (title, author, pages, read) {
     this.title = title;
@@ -14,8 +12,6 @@ function Book (title, author, pages, read) {
     this.pages = pages;
     this.read = read;
     this.toggleRead = this.toggleRead.bind(this);
-    this.info = function() {
-        return "this.title + ' by ' + this.author + ', ' + this.pages + ', ' this.read"
     }
 }
 
@@ -30,11 +26,11 @@ Book.prototype.toggleRead = function() {
 let library = [];
 appendBooks(library);
 
-addBook.addEventListener("click", function(e) {
+addBook.addEventListener("click", function() {
     formContainer.removeAttribute("hidden");
 });
 
-submit.addEventListener("click", function(e) {
+submit.addEventListener("click", function() {
     let readValue;
     if (formContainer.read.value === "true") {
         readValue = true;
@@ -48,7 +44,7 @@ submit.addEventListener("click", function(e) {
     resetForm();
 });
 
-cancel.addEventListener("click", function(e) {
+cancel.addEventListener("click", function() {
     resetForm();
 })
 
@@ -86,7 +82,7 @@ function deleteButton(li, book, index) {
     let button = document.createElement("button");
     button.setAttribute("id", "delete-" + book.title);
     button.textContent = "Delete";
-    button.addEventListener("click", function(e) => {
+    button.addEventListener("click", function() => {
         library.splice(index, 1);
         document.querySelector("ul").removeChild(document.getElementById(book["title"]));
     });
@@ -97,7 +93,7 @@ function readButton(li, book) {
     let button = document.createElement("button");
     button.setAttribute("id", "read-" + book.title);
     button.textContent = "Read/Unread";
-    button.addEventListener("click", function(e) => {
+    button.addEventListener("click", function() => {
         book.toggleRead();
         appendBooks(library);
     });
